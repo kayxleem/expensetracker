@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\ExpenseController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -13,6 +14,11 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+// Route::get('/', function () {
+//     return view('welcome');
+// });
+Route::get('/', [ExpenseController::class,'index'])->name('index');
+Route::post('/expense', [ExpenseController::class, 'store'])->name('expense');   
+Route::post('/importExpense', [ExpenseController::class, 'importExpense'])->name('import-expense');   
+Route::put('/expense/edit/{expense}', [ExpenseController::class, 'update']);
+Route::delete('/expense/delete/{expense}', [ExpenseController::class, 'destroy']);
